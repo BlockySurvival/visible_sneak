@@ -1,8 +1,8 @@
 local original_props_by_player = {}
 local original_speed_by_player = {}
 local released_by_player = {}
-local sneak_scale = 0.88
-local sneak_speed = 1/3
+local sneak_scale = tonumber(minetest.settings:get("visible_sneak.scale")) or 0.88
+local sneak_speed = tonumber(minetest.settings:get("visible_sneak.speed")) or 1/3
 local sneak_animation = false
 local ANIMATION_SPEED_SNEAK
 
