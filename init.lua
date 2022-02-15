@@ -176,15 +176,18 @@ minetest.register_globalstep(function()
 	-- Make sure the player is crouched when they join if they have collisions
 	local new_on_load = {}
 	for _, player in ipairs(on_load) do
-		local pos = vector.round(player:get_pos())
-		local node = minetest.get_node_or_nil(pos)
-		if node then
-			if not check_can_unsneak(player) then
-				sneak(player)
-				psuedo_sneak(player)
+		local player_pos = player:get_pos()
+		if player_pos then
+			local pos = vector.round(player_pos)
+			local node = minetest.get_node_or_nil(pos)
+			if node then
+				if not check_can_unsneak(player) then
+					sneak(player)
+					psuedo_sneak(player)
+				end
+			else
+				table.insert(new_on_load, player)
 			end
-		else
-			table.insert(new_on_load, player)
 		end
 	end
 	on_load = new_on_load
